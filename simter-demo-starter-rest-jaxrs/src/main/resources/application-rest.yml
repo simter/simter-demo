@@ -1,0 +1,15 @@
+#### JAX-RS Rest Config ####
+
+simter:
+  jersey:
+    #packages: tech.simter    # used to scan for components
+    exclude-types:
+      #- tech.simter.rest.jaxrs.LogRequestFilter
+      #- tech.simter.rest.jaxrs.CharsetResponseFilter
+      #- tech.simter.rest.jaxrs.ThrowableExceptionMapper
+# JERSEY (JerseyProperties)
+spring:
+  jersey:
+    application-path: /           # Overrides the value of "@ApplicationPath" if specified.
+    servlet.load-on-startup: -1   # Load on startup priority of the Jersey servlet.
+    #init.*:                      # Init parameters to pass to Jersey via the servlet or filter.

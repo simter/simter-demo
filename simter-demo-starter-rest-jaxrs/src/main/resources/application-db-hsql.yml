@@ -1,0 +1,8 @@
+#### hsqldb 开发环境配置 ####
+
+spring:
+  datasource:
+    initialize: ${db.init:false}
+    url: ~                                        # 使用内存数据库不需要设置 url
+  jpa:
+    hibernate.ddl-auto: create-drop               # none | create | create-drop | update | validate

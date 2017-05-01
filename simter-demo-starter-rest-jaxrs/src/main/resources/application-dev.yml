@@ -1,0 +1,31 @@
+#### 开发环境通用配置 ####
+
+spring:
+  #profiles.include: scheduler        # For TaxiDispatchSystem Scheduler
+  main:
+    banner-mode: 'console'
+  datasource:
+    initialize: ${db.init:true}       # true: 使用 schema-{x}.sql、data-{x}.sql 初始化数据库
+  jpa:
+    show-sql: false                    # 控制是否输出 DDL、DML 语句，或者设置 logging.level.org.hibernate.SQL=DEBUG
+    hibernate.ddl-auto: @app.dll-auto@ # none | create | create-drop | update | validate
+
+logging:
+  file: target/app.log                 # will rotate when they reach 10 MB
+  level:                               # one of TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+    root: INFO
+    #org.springframework: WARN
+    #org.springframework.jdbc: INFO
+    #org.hibernate: WARN
+    org.hibernate.SQL: DEBUG          # 或者设置 spring.jpa.show-sql=true
+    org.hibernate.tool: ERROR
+    org.hibernate.tool.hbm2ddl: DEBUG
+    org.springframework.boot: INFO
+
+    org.glassfish.jersey: DEBUG
+    # details all resource, filter, interceptor, body reader/writer when first reach
+    org.glassfish.jersey.server.ApplicationHandler: DEBUG
+
+    tech.simter: DEBUG
+    tech.simter.rest.jaxrs.LogRequestFilter: DEBUG
+    tech.simter.rest.jaxrs.ThrowableExceptionMapper: ERROR

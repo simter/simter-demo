@@ -1,0 +1,46 @@
+#### 全局通用配置 ####
+
+#debug: true        # equals to --debug argument
+#trace: true        # equals to --trace argument
+
+# 数据库连接
+db:
+  name: demo
+  host: localhost
+
+spring:
+  profiles:
+    active: #@spring.profiles.active@
+      - @app.env@
+      - db-@app.db@
+      - @app.http@
+      - @app.rest@
+      - rest
+  application:
+    name: @project.name@
+  datasource:
+    # 数据库连接配置
+    username: ${db.username:demo_owner}
+    password: ${db.password:owner}
+
+    # 数据库初始化
+    continue-on-error: false                         # 如果初始化数据库出错就自动终止程序
+    sql-script-encoding: UTF-8
+
+    #platform: postgresql                             # initialize=true 时方有效,指定此值则忽略 schema、data 的配置
+    schema:                                           # initialize=true 时方有效
+      - classpath:tech/simter/demo/sql/@app.db@/schema-drop.sql     # from gftaxi-lease-data
+      - classpath:tech/simter/demo/sql/@app.db@/schema-create.sql   # from gftaxi-lease-data
+    data:                                             # initialize=true 时方有效
+      - classpath:tech/simter/demo/sql/@app.db@/data.sql            # from gftaxi-lease-data
+  jpa:
+    open-in-view: false
+    #show-sql: true                                   # 控制是否输出 DDL、DML 语句
+    #hibernate.ddl-auto: create-drop                  # none | create | create-drop | update | validate
+
+server:
+  port: ${port:9000}
+  contextPath: /
+  #address: 127.0.0.1
+  #sessionTimeout: 30
+  server-header: @project.name@
