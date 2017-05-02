@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tech.simter.demo.po.Demo;
 import tech.simter.demo.service.DemoService;
+import tech.simter.persistence.CommonState;
 
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class DemoResourceImpl implements DemoResource {
   }
 
   @Override
-  public List<Demo> find() {
-    return demoService.find();
+  public List<Demo> find( CommonState status) {
+    return demoService.find(status);
   }
 
   @Override

@@ -1,6 +1,7 @@
 package tech.simter.demo.dao;
 
 import tech.simter.demo.po.Demo;
+import tech.simter.persistence.CommonState;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public interface DemoDao {
   Demo get(Integer id);
 
-  List<Demo> find();
+  List<Demo> find(CommonState status);
 
   Demo save(Demo demo);
 

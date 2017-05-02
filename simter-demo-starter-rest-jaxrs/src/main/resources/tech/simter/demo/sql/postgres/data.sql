@@ -1,3 +1,3 @@
-insert into demo (name, remark)
-values ('Simter1', null),
-  ('Simter2', 'OK');
+insert into demo (status, name, remark)
+values (2, 'Simter1', null),
+  (4, 'Simter2', 'OK');

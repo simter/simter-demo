@@ -2,9 +2,11 @@ package tech.simter.demo.dao;
 
 import org.springframework.stereotype.Component;
 import tech.simter.demo.po.Demo;
+import tech.simter.persistence.CommonState;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,8 +24,15 @@ public class DemoDaoJpaImpl implements DemoDao {
   }
 
   @Override
-  public List<Demo> find() {
-    return entityManager.createQuery("select d from Demo d order by name", Demo.class).getResultList();
+  public List<Demo> find(CommonState status) {
+    String jpql = "select d from Demo d";
+    if (status != null) jpql += " where status = :status";
+    jpql += " order by name";
+
+    TypedQuery<Demo> query = entityManager.createQuery(jpql, Demo.class);
+    if (status != null) query.setParameter("status", status);
+
+    return query.getResultList();
   }
 
   @Override

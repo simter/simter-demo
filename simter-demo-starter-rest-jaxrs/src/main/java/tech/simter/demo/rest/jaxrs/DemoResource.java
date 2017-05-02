@@ -1,6 +1,7 @@
 package tech.simter.demo.rest.jaxrs;
 
 import tech.simter.demo.po.Demo;
+import tech.simter.persistence.CommonState;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
@@ -20,7 +21,7 @@ public interface DemoResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/")
-  List<Demo> find();
+  List<Demo> find(@QueryParam("status") CommonState status);
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)

@@ -4,6 +4,7 @@ import tech.simter.demo.dao.DemoDao;
 import tech.simter.demo.po.Demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.simter.persistence.CommonState;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -22,8 +23,8 @@ public class DemoServiceImpl implements DemoService {
   }
 
   @Override
-  public List<Demo> find() {
-    return demoDao.find();
+  public List<Demo> find(CommonState status) {
+    return demoDao.find(status);
   }
 
   @Override
