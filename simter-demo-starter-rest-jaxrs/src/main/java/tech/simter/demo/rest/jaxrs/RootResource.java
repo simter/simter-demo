@@ -9,6 +9,5 @@ import javax.ws.rs.Path;
 @Path("/")
 public interface RootResource {
   @GET
-  @Path("/")
   String root();
 }

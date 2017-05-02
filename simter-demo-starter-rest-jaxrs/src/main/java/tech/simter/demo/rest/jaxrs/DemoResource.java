@@ -20,11 +20,17 @@ public interface DemoResource {
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/")
   List<Demo> find(@QueryParam("status") CommonState status);
 
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/")
-  Integer create(@FormParam("name") @NotNull String name, @FormParam("remark") String remark);
+  Integer createByJson(@NotNull Demo demo);
+
+  @POST
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  @Produces(MediaType.APPLICATION_JSON)
+  Integer createByForm(@FormParam("name") @NotNull String name,
+                       @FormParam("status") @NotNull CommonState status,
+                       @FormParam("remark") String remark);
 }

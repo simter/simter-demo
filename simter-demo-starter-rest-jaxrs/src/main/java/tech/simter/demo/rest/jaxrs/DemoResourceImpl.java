@@ -24,19 +24,24 @@ public class DemoResourceImpl implements DemoResource {
 
     // real
     Demo demo = demoService.get(id);
-    com.owlike.genson.ext.jaxrs.GensonJsonConverter c;
     return demo;
   }
 
   @Override
-  public List<Demo> find( CommonState status) {
+  public List<Demo> find(CommonState status) {
     return demoService.find(status);
   }
 
   @Override
-  public Integer create(String name, String remark) {
+  public Integer createByJson(Demo demo) {
+    return demoService.save(demo).id;
+  }
+
+  @Override
+  public Integer createByForm(String name, CommonState status, String remark) {
     Demo demo = new Demo();
     demo.name = name;
+    demo.status = status;
     demo.remark = remark;
     demo = demoService.save(demo);
     return demo.id;
