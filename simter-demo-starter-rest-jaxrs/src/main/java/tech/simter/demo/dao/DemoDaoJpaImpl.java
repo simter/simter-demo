@@ -1,7 +1,7 @@
 package tech.simter.demo.dao;
 
-import tech.simter.demo.po.Demo;
 import org.springframework.stereotype.Component;
+import tech.simter.demo.po.Demo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,15 +23,15 @@ public class DemoDaoJpaImpl implements DemoDao {
 
   @Override
   public List<Demo> find() {
-    return entityManager.createQuery("select * from Demo order by name", Demo.class).getResultList();
+    return entityManager.createQuery("select d from Demo d order by name", Demo.class).getResultList();
   }
 
   @Override
   public Demo save(Demo demo) {
     Objects.requireNonNull(demo);
-    if (demo.id != null) entityManager.merge(demo);
+    if (demo.id != null) demo = entityManager.merge(demo);
     else entityManager.persist(demo);
-    return null;
+    return demo;
   }
 
   @Override

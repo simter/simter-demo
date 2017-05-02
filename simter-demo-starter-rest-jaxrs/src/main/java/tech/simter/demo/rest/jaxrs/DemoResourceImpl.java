@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import tech.simter.demo.po.Demo;
 import tech.simter.demo.service.DemoService;
 
+import java.util.List;
+
 /**
  * @author RJ
  */
@@ -23,6 +25,11 @@ public class DemoResourceImpl implements DemoResource {
     Demo demo = demoService.get(id);
     com.owlike.genson.ext.jaxrs.GensonJsonConverter c;
     return demo;
+  }
+
+  @Override
+  public List<Demo> find() {
+    return demoService.find();
   }
 
   @Override

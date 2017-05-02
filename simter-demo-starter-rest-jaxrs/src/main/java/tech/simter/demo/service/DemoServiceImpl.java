@@ -5,6 +5,7 @@ import tech.simter.demo.po.Demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class DemoServiceImpl implements DemoService {
   }
 
   @Override
+  @Transactional
   public Demo save(Demo demo) {
     return demoDao.save(demo);
   }

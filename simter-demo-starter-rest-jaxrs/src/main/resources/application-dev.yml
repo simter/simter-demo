@@ -28,4 +28,4 @@ logging:
 
     tech.simter: DEBUG
     tech.simter.rest.jaxrs.LogRequestFilter: DEBUG
-    tech.simter.rest.jaxrs.ThrowableExceptionMapper: ERROR
+    tech.simter.rest.jaxrs.ThrowableExceptionMapper: WARN
