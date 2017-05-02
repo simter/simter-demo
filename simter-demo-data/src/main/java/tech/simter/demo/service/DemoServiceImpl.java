@@ -2,19 +2,21 @@ package tech.simter.demo.service;
 
 import tech.simter.demo.dao.DemoDao;
 import tech.simter.demo.po.Demo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import tech.simter.persistence.CommonState;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author RJ
  */
-@Service
+@Named
+@Singleton
 public class DemoServiceImpl implements DemoService {
-  @Autowired
+  @Inject
   private DemoDao demoDao;
 
   @Override

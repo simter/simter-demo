@@ -1,11 +1,13 @@
 package tech.simter.demo.rest.jaxrs;
 
-import org.springframework.stereotype.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * @author RJ
  */
-@Component
+@Named
+@Singleton
 public class RootResourceImpl implements RootResource {
   @Override
   public String root() {

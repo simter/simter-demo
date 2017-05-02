@@ -1,9 +1,10 @@
 package tech.simter.demo.dao;
 
-import org.springframework.stereotype.Component;
 import tech.simter.demo.po.Demo;
 import tech.simter.persistence.CommonState;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -13,7 +14,8 @@ import java.util.Objects;
 /**
  * @author RJ 2017-04-29
  */
-@Component
+@Named
+@Singleton
 public class DemoDaoJpaImpl implements DemoDao {
   @PersistenceContext
   private EntityManager entityManager;

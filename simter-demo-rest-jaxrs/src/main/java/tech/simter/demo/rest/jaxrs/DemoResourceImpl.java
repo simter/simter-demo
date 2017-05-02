@@ -1,19 +1,21 @@
 package tech.simter.demo.rest.jaxrs;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import tech.simter.demo.po.Demo;
 import tech.simter.demo.service.DemoService;
 import tech.simter.persistence.CommonState;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.util.List;
 
 /**
  * @author RJ
  */
-@Component
+@Named
+@Singleton
 public class DemoResourceImpl implements DemoResource {
-  @Autowired
+  @Inject
   private DemoService demoService;
 
   @Override

@@ -20,11 +20,15 @@
     </dependency>
     <dependency>
       <groupId>tech.simter</groupId>
-      <artifactId>simter-rest-jaxrs</artifactId>
+      <artifactId>simter-rest-jaxrs-jersey</artifactId>
     </dependency>
     <dependency>
       <groupId>tech.simter</groupId>
-      <artifactId>simter-rest-jaxrs-jersey</artifactId>
+      <artifactId>simter-demo-rest-jaxrs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>tech.simter</groupId>
+      <artifactId>simter-demo-data-jpa</artifactId>
     </dependency>
 
     <!-- Test -->
@@ -87,7 +91,7 @@
     <profile>
       <id>dev-postgres</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
         <app.env>dev</app.env>
@@ -115,7 +119,7 @@
     <profile>
       <id>dev-hsql</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
         <app.env>dev</app.env>
@@ -141,7 +145,7 @@
       </dependencies>
     </profile>
   </profiles>
-  <url>https://github.com/simter/sister-demo-starter-rest-jaxrs</url>
+  <url>https://github.com/simter/sister-demo</url>
   <licenses>
     <license>
       <name>gftaxi</name>
@@ -150,7 +154,7 @@
     </license>
   </licenses>
   <scm>
-    <url>https://github.com/simter/sister-demo-starter-rest-jaxrs</url>
+    <url>https://github.com/simter/sister-demo</url>
   </scm>
   <organization>
     <name>simter</name>
@@ -164,6 +168,6 @@
   </developers>
   <issueManagement>
     <system>Github</system>
-    <url>https://github.com/simter/sister-demo-starter-rest-jaxrs/issues</url>
+    <url>https://github.com/simter/sister-demo/issues</url>
   </issueManagement>
 </project>

@@ -7,17 +7,37 @@
     <version>0.3-SNAPSHOT</version>
     <relativePath></relativePath>
   </parent>
-  <artifactId>simter-demo</artifactId>
-  <name>simter-demo</name>
+  <artifactId>simter-demo-data-jpa</artifactId>
+  <name>simter-demo-data-jpa</name>
   <version>0.3-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   <description>A Simter Demo</description>
-  <modules>
-    <module>simter-demo-data</module>
-    <module>simter-demo-data-jpa</module>
-    <module>simter-demo-rest-jaxrs</module>
-    <module>simter-demo-starter-rest-jaxrs</module>
-  </modules>
+  <dependencies>
+    <!-- Simter -->
+    <dependency>
+      <groupId>tech.simter</groupId>
+      <artifactId>simter-demo-data</artifactId>
+    </dependency>
+
+    <!-- Third Party -->
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>persistence-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
   <url>https://github.com/simter/sister-demo</url>
   <licenses>
     <license>
