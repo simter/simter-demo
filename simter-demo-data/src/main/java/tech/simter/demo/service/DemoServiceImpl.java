@@ -36,6 +36,7 @@ public class DemoServiceImpl implements DemoService {
   }
 
   @Override
+  @Transactional
   public void delete(Integer id) {
     demoDao.delete(id);
   }
