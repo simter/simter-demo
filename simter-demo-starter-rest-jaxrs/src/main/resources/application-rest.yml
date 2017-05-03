@@ -1,6 +1,9 @@
 #### JAX-RS Rest Config ####
 
 simter:
+  jwt:
+    secret-key: simter-demo
+    abort-if-unauthorized: false
   jersey:
     #packages: tech.simter    # used to scan for components
     exclude-types:

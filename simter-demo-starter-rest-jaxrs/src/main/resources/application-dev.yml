@@ -27,5 +27,6 @@ logging:
     org.glassfish.jersey.server.ApplicationHandler: DEBUG
 
     tech.simter: DEBUG
+    tech.simter.rest.jaxrs.JwtAuthRequestFilter: WARN
     tech.simter.rest.jaxrs.LogRequestFilter: DEBUG
     tech.simter.rest.jaxrs.ThrowableExceptionMapper: WARN
