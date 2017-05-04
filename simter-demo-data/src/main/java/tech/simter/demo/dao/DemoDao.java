@@ -6,7 +6,7 @@ import tech.simter.persistence.CommonState;
 import java.util.List;
 
 /**
- * @author RJ 2017-04-29
+ * @author RJ
  */
 public interface DemoDao {
   Demo get(Integer id);
@@ -15,5 +15,5 @@ public interface DemoDao {
 
   Demo save(Demo demo);
 
-  void delete(Integer... ids);
+  int delete(Integer... ids);
 }

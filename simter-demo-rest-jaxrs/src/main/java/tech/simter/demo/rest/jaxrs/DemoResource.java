@@ -22,6 +22,13 @@ public interface DemoResource {
   @Produces(MediaType.APPLICATION_JSON)
   List<Demo> find(@QueryParam("status") CommonState status);
 
+  @DELETE
+  @Path("{id}")
+  void delete(@PathParam("id") Integer id);
+
+  @DELETE
+  void delete(Integer[] ids);
+
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)

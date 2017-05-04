@@ -25,13 +25,22 @@ public class DemoResourceImpl implements DemoResource {
     if (id.equals(0)) throw new SecurityException("permitted");
 
     // real
-    Demo demo = demoService.get(id);
-    return demo;
+    return demoService.get(id);
   }
 
   @Override
   public List<Demo> find(CommonState status) {
     return demoService.find(status);
+  }
+
+  @Override
+  public void delete(Integer id) {
+    demoService.delete(id);
+  }
+
+  @Override
+  public void delete(Integer[] ids) {
+    demoService.delete(ids);
   }
 
   @Override

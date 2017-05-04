@@ -15,5 +15,5 @@ public interface DemoService {
 
   Demo save(Demo demo);
 
-  void delete(Integer id);
+  void delete(Integer... ids);
 }
