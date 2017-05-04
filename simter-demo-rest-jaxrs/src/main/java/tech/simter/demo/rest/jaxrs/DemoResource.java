@@ -27,6 +27,7 @@ public interface DemoResource {
   void delete(@PathParam("id") Integer id);
 
   @DELETE
+  @Consumes(MediaType.APPLICATION_JSON)
   void delete(Integer[] ids);
 
   @POST

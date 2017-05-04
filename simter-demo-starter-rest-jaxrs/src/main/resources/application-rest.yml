@@ -4,15 +4,19 @@ simter:
   jwt:
     secret-key: simter-demo
     abort-if-unauthorized: false
-  jersey:
+  jersey:  # for tech.simter.rest.jaxrs.jersey.JerseyConfiguration
+    properties:
+      "[jersey.config.server.wadl.disableWadl]": true # WADL generation is enabled in Jersey by default
     #packages: tech.simter    # used to scan for components
     exclude-types:
+      #- tech.simter.rest.jaxrs.LogResponseFilter
       #- tech.simter.rest.jaxrs.LogRequestFilter
       #- tech.simter.rest.jaxrs.CharsetResponseFilter
       #- tech.simter.rest.jaxrs.ThrowableExceptionMapper
-# JERSEY (JerseyProperties)
+
+# JERSEY
 spring:
   jersey:
-    application-path: /           # Overrides the value of "@ApplicationPath" if specified.
-    servlet.load-on-startup: -1   # Load on startup priority of the Jersey servlet.
-    #init.*:                      # Init parameters to pass to Jersey via the servlet or filter.
+    application-path: /           # Overrides the value of "@ApplicationPath" if specified
+    servlet.load-on-startup: -1   # Load on startup priority of the Jersey servlet
+    #init.*:                      # Init parameters to pass to Jersey via the servlet or filter
