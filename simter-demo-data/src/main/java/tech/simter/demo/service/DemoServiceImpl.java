@@ -2,6 +2,7 @@ package tech.simter.demo.service;
 
 import tech.simter.demo.dao.DemoDao;
 import tech.simter.demo.po.Demo;
+import tech.simter.meta.service.MetaService;
 import tech.simter.persistence.CommonState;
 
 import javax.inject.Inject;
@@ -16,6 +17,8 @@ import java.util.List;
 @Named
 @Singleton
 public class DemoServiceImpl implements DemoService {
+  @Inject
+  private MetaService metaService;
   @Inject
   private DemoDao demoDao;
 
@@ -32,7 +35,10 @@ public class DemoServiceImpl implements DemoService {
   @Override
   @Transactional
   public Demo save(Demo demo) {
-    return demoDao.save(demo);
+    Demo savedDemo = demoDao.save(demo);
+    if (demo.id == null) metaService.addCreation(Demo.class, savedDemo.id);
+    else metaService.addModification(Demo.class, savedDemo.id);
+    return savedDemo;
   }
 
   @Override
