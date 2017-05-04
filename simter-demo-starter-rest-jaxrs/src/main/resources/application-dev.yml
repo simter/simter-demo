@@ -20,6 +20,10 @@ logging:
     org.hibernate.SQL: DEBUG          # 或者设置 spring.jpa.show-sql=true
     org.hibernate.tool: ERROR
     org.hibernate.tool.hbm2ddl: DEBUG
+    org.hibernate.engine.query.spi.HQLQueryPlan: TRACE    # TRACE-jpql语句
+    org.hibernate.engine.spi.QueryParameters: TRACE       # TRACE-jpql命名参数
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # TRACE-SQL占位参数，如 binding parameter [N] as [SQL-TYPW] - [VALUE]
+    org.hibernate.type.descriptor.converter.AttributeConverterSqlTypeDescriptorAdapter: DEBUG # DEBUG-属性值到DB值的转换，如 Converted value on binding : Enabled -> 2
     org.springframework.boot: INFO
 
     org.glassfish.jersey: DEBUG
