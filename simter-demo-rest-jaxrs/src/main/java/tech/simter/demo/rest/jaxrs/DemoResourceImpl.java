@@ -1,5 +1,7 @@
 package tech.simter.demo.rest.jaxrs;
 
+import tech.simter.data.Created;
+import tech.simter.data.Ts;
 import tech.simter.demo.po.Demo;
 import tech.simter.demo.service.DemoService;
 import tech.simter.persistence.CommonState;
@@ -44,17 +46,14 @@ public class DemoResourceImpl implements DemoResource {
   }
 
   @Override
-  public Integer createByJson(Demo demo) {
-    return demoService.save(demo).id;
+  public Created<Integer> create(Demo demo) {
+    demoService.save(demo);
+    return Created.with(demo.id);
   }
 
   @Override
-  public Integer createByForm(String name, CommonState status, String remark) {
-    Demo demo = new Demo();
-    demo.name = name;
-    demo.status = status;
-    demo.remark = remark;
-    demo = demoService.save(demo);
-    return demo.id;
+  public Ts update(Integer id, Demo demo) {
+    demoService.save(demo);
+    return Ts.now();
   }
 }
