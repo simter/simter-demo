@@ -47,12 +47,19 @@ public class DemoResourceImpl implements DemoResource {
 
   @Override
   public Created<Integer> create(Demo demo) {
-    demoService.save(demo);
-    return Created.with(demo.id);
+    Demo saved = demoService.save(demo);
+    return Created.with(saved.id);
+  }
+
+  @Override
+  public Created<Integer> createByPUT(Demo demo) {
+    Demo saved = demoService.save(demo);
+    return Created.with(saved.id);
   }
 
   @Override
   public Ts update(Integer id, Demo demo) {
+    demo.id = id;
     demoService.save(demo);
     return Ts.now();
   }

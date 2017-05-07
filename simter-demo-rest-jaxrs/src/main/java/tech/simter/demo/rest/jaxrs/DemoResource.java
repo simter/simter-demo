@@ -43,7 +43,7 @@ public interface DemoResource {
    */
   @DELETE
   @Path("{id}")
-  void delete(@PathParam("id") Integer id);
+  void delete(@PathParam("id") @NotNull Integer id);
 
   /**
    * 删除特定主键的{demo}
@@ -58,12 +58,23 @@ public interface DemoResource {
    * 创建一个新的{demo}
    *
    * @param demo 新的{demo}信息
-   * @return 创建信息
+   * @return 已创建的新{demo}
    */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   Created<Integer> create(@NotNull Demo demo);
+
+  /**
+   * 创建一个新的{demo}
+   *
+   * @param demo 新的{demo}信息
+   * @return 已创建的新{demo}
+   */
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  Created<Integer> createByPUT(@NotNull Demo demo);
 
   /**
    * 更新{demo}信息
