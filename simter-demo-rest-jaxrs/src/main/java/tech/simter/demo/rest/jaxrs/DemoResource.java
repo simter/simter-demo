@@ -1,6 +1,7 @@
 package tech.simter.demo.rest.jaxrs;
 
 import tech.simter.data.Created;
+import tech.simter.data.Page;
 import tech.simter.data.Ts;
 import tech.simter.demo.po.Demo;
 import tech.simter.persistence.CommonState;
@@ -35,6 +36,19 @@ public interface DemoResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   List<Demo> find(@QueryParam("status") CommonState status);
+
+  /**
+   * 获取指定状态的所有{demo}
+   *
+   * @param status 状态，为空则忽略状态条件
+   * @return 指定状态的所有{demo}
+   */
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/page")
+  Page<Demo> findPage(@QueryParam("page-no") int pageNo,
+                      @QueryParam("page-size") int pageSize,
+                      @QueryParam("status") CommonState status);
 
   /**
    * 删除指定主键的{demo}

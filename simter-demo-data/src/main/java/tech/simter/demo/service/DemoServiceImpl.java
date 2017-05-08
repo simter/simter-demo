@@ -1,5 +1,6 @@
 package tech.simter.demo.service;
 
+import tech.simter.data.Page;
 import tech.simter.demo.dao.DemoDao;
 import tech.simter.demo.po.Demo;
 import tech.simter.meta.service.MetaService;
@@ -30,6 +31,11 @@ public class DemoServiceImpl implements DemoService {
   @Override
   public List<Demo> find(CommonState status) {
     return demoDao.find(status);
+  }
+
+  @Override
+  public Page<Demo> find(int pageNo, int pageSize, CommonState status) {
+    return demoDao.find(pageNo, pageSize, status);
   }
 
   @Override

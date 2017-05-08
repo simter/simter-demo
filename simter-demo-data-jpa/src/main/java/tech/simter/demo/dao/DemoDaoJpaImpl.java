@@ -1,5 +1,6 @@
 package tech.simter.demo.dao;
 
+import tech.simter.data.Page;
 import tech.simter.demo.po.Demo;
 import tech.simter.persistence.CommonState;
 
@@ -37,6 +38,26 @@ public class DemoDaoJpaImpl implements DemoDao {
     if (status != null) query.setParameter("status", status);
 
     return query.getResultList();
+  }
+
+  @Override
+  public Page<Demo> find(int pageNo, int pageCapacity, CommonState status) {
+    String baseQl = " from Demo d";
+    if (status != null) baseQl += " where status = :status";
+    String rowsQl = "select d" + baseQl + " order by name";
+    String countQl = "select count(*)" + baseQl;
+
+    TypedQuery<Demo> rowsQuery = entityManager.createQuery(rowsQl, Demo.class);
+    TypedQuery<Long> countQuery = entityManager.createQuery(countQl, Long.class);
+    if (status != null) {
+      rowsQuery.setParameter("status", status);
+      countQuery.setParameter("status", status);
+    }
+
+    rowsQuery.setFirstResult(Page.calculateOffset(pageNo, pageCapacity));
+    rowsQuery.setMaxResults(Page.toValidCapacity(pageCapacity));
+
+    return Page.build(pageNo, pageCapacity, rowsQuery.getResultList(), countQuery.getSingleResult());
   }
 
   @Override

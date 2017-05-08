@@ -1,6 +1,7 @@
 package tech.simter.demo.rest.jaxrs;
 
 import tech.simter.data.Created;
+import tech.simter.data.Page;
 import tech.simter.data.Ts;
 import tech.simter.demo.po.Demo;
 import tech.simter.demo.service.DemoService;
@@ -33,6 +34,11 @@ public class DemoResourceImpl implements DemoResource {
   @Override
   public List<Demo> find(CommonState status) {
     return demoService.find(status);
+  }
+
+  @Override
+  public Page<Demo> findPage(int pageNo, int pageSize, CommonState status) {
+    return demoService.find(pageNo, pageSize, status);
   }
 
   @Override

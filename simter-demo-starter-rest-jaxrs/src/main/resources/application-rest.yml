@@ -13,6 +13,9 @@ simter:
       #- tech.simter.rest.jaxrs.LogRequestFilter
       #- tech.simter.rest.jaxrs.CharsetResponseFilter
       #- tech.simter.rest.jaxrs.ThrowableExceptionMapper
+    genson:
+      converter-factories:
+        - tech.simter.genson.ext.data.PageConverterFactory
 
 # JERSEY
 spring:
