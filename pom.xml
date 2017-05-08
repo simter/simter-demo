@@ -13,6 +13,7 @@
   <packaging>pom</packaging>
   <description>A Simter Demo</description>
   <modules>
+    <module>simter-demo-parent</module>
     <module>simter-demo-data</module>
     <module>simter-demo-data-jpa</module>
     <module>simter-demo-rest-jaxrs</module>

@@ -3,13 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>tech.simter</groupId>
-    <artifactId>simter-parent</artifactId>
+    <artifactId>simter-demo-parent</artifactId>
     <version>0.3-SNAPSHOT</version>
-    <relativePath></relativePath>
+    <relativePath/>
   </parent>
   <artifactId>simter-demo-data-jpa</artifactId>
   <name>simter-demo-data-jpa</name>
-  <version>0.3-SNAPSHOT</version>
   <packaging>jar</packaging>
   <description>A Simter Demo</description>
   <dependencies>

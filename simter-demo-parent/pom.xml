@@ -3,31 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>tech.simter</groupId>
-    <artifactId>simter-demo-parent</artifactId>
+    <artifactId>simter-parent</artifactId>
     <version>0.3-SNAPSHOT</version>
     <relativePath/>
   </parent>
-  <artifactId>simter-demo-rest-jaxrs</artifactId>
-  <name>simter-demo-rest-jaxrs</name>
-  <packaging>jar</packaging>
-  <description>A Simter Demo</description>
+  <artifactId>simter-demo-parent</artifactId>
+  <packaging>pom</packaging>
+  <description>A Simter Demo Parent</description>
   <dependencies>
-    <!-- Simter -->
-    <dependency>
-      <groupId>tech.simter</groupId>
-      <artifactId>simter-demo-data</artifactId>
-    </dependency>
-
-    <!-- Third Party -->
-    <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>javax.ws.rs-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-    </dependency>
-
     <!-- Test -->
     <dependency>
       <groupId>junit</groupId>
