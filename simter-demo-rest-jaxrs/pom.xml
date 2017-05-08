@@ -40,6 +40,76 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <profiles>
+    <profile>
+      <id>simter-unit-test</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <app.env>dev</app.env>
+        <app.db>hsql</app.db>
+        <app.http>tomcat</app.http>
+        <app.rest>jersey</app.rest>
+        <app.dll-auto>create-drop</app.dll-auto>
+      </properties>
+      <dependencies>
+        <!-- Simter -->
+        <dependency>
+          <groupId>tech.simter</groupId>
+          <artifactId>simter-genson-ext</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>tech.simter</groupId>
+          <artifactId>simter-rest-jaxrs-jersey</artifactId>
+          <scope>test</scope>
+        </dependency>
+
+        <!-- Third Party -->
+        <dependency>
+          <groupId>com.owlike</groupId>
+          <artifactId>genson</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jcl-over-slf4j</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>javax.persistence</groupId>
+          <artifactId>persistence-api</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-test</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-jersey</artifactId>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
   <url>https://github.com/simter/sister-demo</url>
   <licenses>
     <license>
