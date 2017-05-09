@@ -79,6 +79,7 @@ public class DemoResourceImplTest {
     // verify
     verify(demoService, times(1)).find(any());
     assertThat(entity.getStatusCode(), is(HttpStatus.OK));
+    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
     List result = entity.getBody();
     for (int i = 0; i < result.size(); i++) {
       assertThat(((Map) result.get(i)).get("id"), is(demos.get(i).id));
@@ -101,6 +102,7 @@ public class DemoResourceImplTest {
     // verify
     verify(demoService, times(1)).find(1, 25, CommonState.Enabled);
     assertThat(entity.getStatusCode(), is(HttpStatus.OK));
+    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
     Map result = entity.getBody();
     assertThat(result.get("pageNo"), is(1));
     assertThat(result.get("pageSize"), is(25));
@@ -126,6 +128,7 @@ public class DemoResourceImplTest {
     // verify
     verify(demoService, times(1)).save(any());
     assertThat(entity.getStatusCode(), is(HttpStatus.CREATED));
+    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
     Map result = entity.getBody();
     assertThat(result.get("id"), is(demo.id));
     assertThat(result.containsKey("ts"), is(true));
@@ -147,6 +150,7 @@ public class DemoResourceImplTest {
     // verify
     verify(demoService, times(1)).save(any());
     assertThat(entity.getStatusCode(), is(HttpStatus.OK));
+    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
     Map result = entity.getBody();
     assertThat(result.containsKey("ts"), is(true));
   }
