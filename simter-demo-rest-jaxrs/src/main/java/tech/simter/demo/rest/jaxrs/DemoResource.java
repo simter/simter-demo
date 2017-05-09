@@ -5,6 +5,7 @@ import tech.simter.data.Page;
 import tech.simter.data.Ts;
 import tech.simter.demo.po.Demo;
 import tech.simter.persistence.CommonState;
+import tech.simter.rest.jaxrs.CreatedStatus;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * @author RJ
  */
-@Path("/demo")
+@Path("demo")
 public interface DemoResource {
   /**
    * 获取指定主键的{demo}
@@ -45,7 +46,7 @@ public interface DemoResource {
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/page")
+  @Path("page")
   Page<Demo> findPage(@QueryParam("page-no") int pageNo,
                       @QueryParam("page-size") int pageSize,
                       @QueryParam("status") CommonState status);
@@ -77,6 +78,7 @@ public interface DemoResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
+  @CreatedStatus
   Created<Integer> create(@NotNull Demo demo);
 
   /**

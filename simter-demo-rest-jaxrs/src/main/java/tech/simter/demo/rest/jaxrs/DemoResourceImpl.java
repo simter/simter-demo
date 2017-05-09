@@ -54,6 +54,7 @@ public class DemoResourceImpl implements DemoResource {
   @Override
   public Created<Integer> create(Demo demo) {
     Demo saved = demoService.save(demo);
+    //response.setStatus(Response.CreatedStatus.CREATED.getStatusCode());
     return Created.with(saved.id);
   }
 

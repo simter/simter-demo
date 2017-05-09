@@ -14,6 +14,7 @@ import tech.simter.data.Page;
 import tech.simter.demo.po.Demo;
 import tech.simter.demo.service.DemoService;
 import tech.simter.persistence.CommonState;
+import tech.simter.rest.jaxrs.CreatedStatusResponseFilter;
 import tech.simter.rest.jaxrs.jersey.JerseyConfiguration;
 import tech.simter.rest.jaxrs.jersey.JerseyResourceConfig;
 
@@ -33,7 +34,7 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
   webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-  classes = {JerseyResourceConfig.class, DemoResourceImplTest.class}
+  classes = {DemoResourceImplTest.class, JerseyResourceConfig.class, CreatedStatusResponseFilter.class}
 )
 @SpringBootApplication
 @MockBean(DemoService.class)
@@ -59,6 +60,7 @@ public class DemoResourceImplTest {
     // verify
     verify(demoService, times(1)).get(demo.id);
     assertThat(entity.getStatusCode(), is(HttpStatus.OK));
+    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
     assertThat(entity.getBody().id, is(demo.id));
   }
 
