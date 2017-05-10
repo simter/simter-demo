@@ -14,16 +14,13 @@ import tech.simter.data.Page;
 import tech.simter.demo.po.Demo;
 import tech.simter.demo.service.DemoService;
 import tech.simter.persistence.CommonState;
-import tech.simter.rest.jaxrs.CreatedStatusResponseFilter;
-import tech.simter.rest.jaxrs.jersey.JerseyConfiguration;
-import tech.simter.rest.jaxrs.jersey.JerseyResourceConfig;
+import tech.simter.test.JaxrsTestConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -32,20 +29,14 @@ import static org.mockito.Mockito.*;
  * @author RJ
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(
-  webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-  classes = {DemoResourceImplTest.class, JerseyResourceConfig.class, CreatedStatusResponseFilter.class}
-)
 @SpringBootApplication
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = JaxrsTestConfiguration.class)
 @MockBean(DemoService.class)
-@MockBean(JerseyConfiguration.class)
 public class DemoResourceImplTest {
   @Autowired
   private TestRestTemplate restTemplate;
   @Autowired
   private DemoService demoService;
-  @Autowired
-  private JerseyConfiguration jerseyConfiguration;
 
   @Test
   public void get() {
@@ -89,27 +80,34 @@ public class DemoResourceImplTest {
   @Test
   public void findPage() {
     // mock service method
+    int pageNo = 1;
+    int pageSize = 25;
+    long totalCount = 100;
+    CommonState status = CommonState.Enabled;
+    Integer id = 1;
     List<Demo> demos = new ArrayList<>();
     Demo demo = mock(Demo.class);
-    demo.id = 1;
+    demo.id = id;
     demos.add(demo);
-    Page<Demo> page = Page.build(1, 25, demos, 100);
-    when(demoService.find(1, 25, CommonState.Enabled)).thenReturn(page);
+    Page<Demo> page = Page.build(pageNo, pageSize, demos, totalCount);
+    when(demoService.find(pageNo, pageSize, status)).thenReturn(page);
 
     // execute rest
-    ResponseEntity<Map> entity = this.restTemplate.getForEntity("/demo", Map.class);
+    ResponseEntity<Map> entity = this.restTemplate.getForEntity("/demo/page?pageNo={0}&pageSize={1}&status={2}",
+      Map.class, pageNo, pageSize, status);
 
     // verify
-    verify(demoService, times(1)).find(1, 25, CommonState.Enabled);
+    verify(demoService, times(1)).find(pageNo, pageSize, status);
     assertThat(entity.getStatusCode(), is(HttpStatus.OK));
     assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
     Map result = entity.getBody();
-    assertThat(result.get("pageNo"), is(1));
-    assertThat(result.get("pageSize"), is(25));
-    assertThat(result.get("count"), is(100));
-    assertThat(result.get("rows"), notNull());
-    assertThat(((List) result.get("rows")).size(), is(demos.size()));
-    assertThat(((Map) ((List) result.get("rows")).get(0)).get("id"), is(demos.get(0).id));
+    assertThat(result.get("pageNo"), is(pageNo));
+    assertThat(result.get("pageSize"), is(pageSize));
+    assertThat(Long.parseLong(result.get("count").toString()), is(totalCount));
+    List rows = (List) result.get("rows");
+    assertThat(rows, notNullValue());
+    assertThat(rows.size(), is(demos.size()));
+    assertThat(((Map) rows.get(0)).get("id"), is(demos.get(0).id));
   }
 
   @Test

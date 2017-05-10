@@ -3,5 +3,10 @@
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
   <!-- trace < debug < info < warn < error -->
   <root level="warn"/>
+  <!--<logger name="org.springframework" level="info"/>-->
+  <!--<logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="debug"/>-->
+  <!--<logger name="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" level="debug"/>-->
+  <!--<logger name="org.springframework.beans.factory.annotation.InjectionMetadata" level="debug"/>-->
+  <!--<logger name="org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader" level="debug"/>-->
   <!--<logger name="org.springframework.boot" level="info"/>-->
 </configuration>

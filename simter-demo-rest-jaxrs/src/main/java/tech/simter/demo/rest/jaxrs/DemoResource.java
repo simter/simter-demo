@@ -39,16 +39,18 @@ public interface DemoResource {
   List<Demo> find(@QueryParam("status") CommonState status);
 
   /**
-   * 获取指定状态的所有{demo}
+   * 获取指定状态的{demo}
    *
-   * @param status 状态，为空则忽略状态条件
-   * @return 指定状态的所有{demo}
+   * @param pageNo   页码, 小于 1 代表未指定, 默认设为 1
+   * @param pageSize 页容量, 小于 1 代表未指定, 默认由系统参数设定
+   * @param status   状态，为空则忽略
+   * @return 指定状态的{demo}分页信息
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("page")
-  Page<Demo> findPage(@QueryParam("page-no") int pageNo,
-                      @QueryParam("page-size") int pageSize,
+  Page<Demo> findPage(@QueryParam("pageNo") int pageNo,
+                      @QueryParam("pageSize") int pageSize,
                       @QueryParam("status") CommonState status);
 
   /**
