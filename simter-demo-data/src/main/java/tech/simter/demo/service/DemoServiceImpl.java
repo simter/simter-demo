@@ -41,10 +41,11 @@ public class DemoServiceImpl implements DemoService {
   @Override
   @Transactional
   public Demo save(Demo demo) {
-    Demo savedDemo = demoDao.save(demo);
-    if (demo.id == null) metaService.addCreation(Demo.class, savedDemo.id);
-    else metaService.addModification(Demo.class, savedDemo.id);
-    return savedDemo;
+    boolean isNew = demo.id == null;
+    Demo saved = demoDao.save(demo);
+    if (isNew) metaService.addCreation(Demo.class, saved.id);
+    else metaService.addModification(Demo.class, saved.id);
+    return saved;
   }
 
   @Override
