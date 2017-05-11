@@ -29,9 +29,14 @@ spring:
 
     #platform: postgresql                             # initialize=true 时方有效,指定此值则忽略 schema、data 的配置
     schema:                                           # initialize=true 时方有效
+      # drop
       - classpath:tech/simter/demo/sql/@app.db@/schema-drop.sql     # from simter-demo-data
+      - classpath:tech/simter/meta/sql/@app.db@/schema-drop.sql     # from simter-meta
+      # create
+      - classpath:tech/simter/meta/sql/@app.db@/schema-create.sql   # from simter-meta
       - classpath:tech/simter/demo/sql/@app.db@/schema-create.sql   # from simter-demo-data
     data:                                             # initialize=true 时方有效
+      - classpath:tech/simter/meta/sql/@app.db@/data.sql            # from simter-meta
       - classpath:tech/simter/demo/sql/@app.db@/data.sql            # from simter-demo-data
   jpa:
     open-in-view: false
