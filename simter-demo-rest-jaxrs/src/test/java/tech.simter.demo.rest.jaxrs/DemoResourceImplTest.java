@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import tech.simter.data.Page;
 import tech.simter.demo.po.Demo;
@@ -30,50 +31,51 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(SpringRunner.class)
 @SpringBootApplication
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = JaxrsTestConfiguration.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ContextConfiguration(classes = {JaxrsTestConfiguration.class, DemoResourceImpl.class})
 @MockBean(DemoService.class)
 public class DemoResourceImplTest {
   @Autowired
   private TestRestTemplate restTemplate;
   @Autowired
-  private DemoService demoService;
+  private DemoService service;
 
   @Test
   public void get() {
     // mock service method
-    Demo demo = mock(Demo.class);
-    demo.id = 1;
-    when(demoService.get(demo.id)).thenReturn(demo);
+    Demo dto = mock(Demo.class);
+    dto.id = 1;
+    when(service.get(dto.id)).thenReturn(dto);
 
     // execute rest
-    ResponseEntity<Demo> entity = this.restTemplate.getForEntity("/demo/1", Demo.class);
+    ResponseEntity<Demo> response = this.restTemplate.getForEntity("/demo/1", Demo.class);
 
     // verify
-    verify(demoService, times(1)).get(demo.id);
-    assertThat(entity.getStatusCode(), is(HttpStatus.OK));
-    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
-    assertThat(entity.getBody().id, is(demo.id));
+    verify(service, times(1)).get(dto.id);
+    assertThat(response.getStatusCode(), is(HttpStatus.OK));
+    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    assertThat(response.getBody().id, is(dto.id));
   }
 
   @Test
   public void findList() {
     // mock service method
-    List<Demo> demos = new ArrayList<>();
-    Demo demo = mock(Demo.class);
-    demo.id = 1;
-    demos.add(demo);
-    when(demoService.find(any())).thenReturn(demos);
+    List<Demo> list = new ArrayList<>();
+    Demo dto = mock(Demo.class);
+    dto.id = 1;
+    list.add(dto);
+    when(service.find(any())).thenReturn(list);
 
     // execute rest
-    ResponseEntity<List> entity = this.restTemplate.getForEntity("/demo", List.class);
+    ResponseEntity<List> response = this.restTemplate.getForEntity("/demo", List.class);
 
     // verify
-    verify(demoService, times(1)).find(any());
-    assertThat(entity.getStatusCode(), is(HttpStatus.OK));
-    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
-    List result = entity.getBody();
-    for (int i = 0; i < result.size(); i++) {
-      assertThat(((Map) result.get(i)).get("id"), is(demos.get(i).id));
+    verify(service, times(1)).find(any());
+    assertThat(response.getStatusCode(), is(HttpStatus.OK));
+    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    List body = response.getBody();
+    for (int i = 0; i < body.size(); i++) {
+      assertThat(((Map) body.get(i)).get("id"), is(list.get(i).id));
     }
   }
 
@@ -85,104 +87,104 @@ public class DemoResourceImplTest {
     long totalCount = 100;
     CommonState status = CommonState.Enabled;
     Integer id = 1;
-    List<Demo> demos = new ArrayList<>();
-    Demo demo = mock(Demo.class);
-    demo.id = id;
-    demos.add(demo);
-    Page<Demo> page = Page.build(pageNo, pageSize, demos, totalCount);
-    when(demoService.find(pageNo, pageSize, status)).thenReturn(page);
+    List<Demo> list = new ArrayList<>();
+    Demo dto = mock(Demo.class);
+    dto.id = id;
+    list.add(dto);
+    Page<Demo> page = Page.build(pageNo, pageSize, list, totalCount);
+    when(service.find(pageNo, pageSize, status)).thenReturn(page);
 
     // execute rest
-    ResponseEntity<Map> entity = this.restTemplate.getForEntity("/demo/page?pageNo={0}&pageSize={1}&status={2}",
+    ResponseEntity<Map> response = this.restTemplate.getForEntity("/demo/page?pageNo={0}&pageSize={1}&status={2}",
       Map.class, pageNo, pageSize, status);
 
     // verify
-    verify(demoService, times(1)).find(pageNo, pageSize, status);
-    assertThat(entity.getStatusCode(), is(HttpStatus.OK));
-    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
-    Map result = entity.getBody();
-    assertThat(result.get("pageNo"), is(pageNo));
-    assertThat(result.get("pageSize"), is(pageSize));
-    assertThat(Long.parseLong(result.get("count").toString()), is(totalCount));
-    List rows = (List) result.get("rows");
+    verify(service, times(1)).find(pageNo, pageSize, status);
+    assertThat(response.getStatusCode(), is(HttpStatus.OK));
+    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    Map body = response.getBody();
+    assertThat(body.get("pageNo"), is(pageNo));
+    assertThat(body.get("pageSize"), is(pageSize));
+    assertThat(Long.parseLong(body.get("count").toString()), is(totalCount));
+    List rows = (List) body.get("rows");
     assertThat(rows, notNullValue());
-    assertThat(rows.size(), is(demos.size()));
-    assertThat(((Map) rows.get(0)).get("id"), is(demos.get(0).id));
+    assertThat(rows.size(), is(list.size()));
+    assertThat(((Map) rows.get(0)).get("id"), is(list.get(0).id));
   }
 
   @Test
   public void create() {
     // mock service method
-    Demo demo = mock(Demo.class);
-    demo.id = 1;
-    when(demoService.save(any())).thenReturn(demo);
+    Demo dto = mock(Demo.class);
+    dto.id = 1;
+    when(service.save(any())).thenReturn(dto);
 
     // execute rest
     HttpHeaders requestHeaders = new HttpHeaders();
     requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-    HttpEntity<String> httpEntity = new HttpEntity<>(new Genson().serialize(demo), requestHeaders);
-    ResponseEntity<Map> entity = this.restTemplate.postForEntity("/demo", httpEntity, Map.class);
+    HttpEntity<String> httpEntity = new HttpEntity<>(new Genson().serialize(dto), requestHeaders);
+    ResponseEntity<Map> response = this.restTemplate.postForEntity("/demo", httpEntity, Map.class);
 
     // verify
-    verify(demoService, times(1)).save(any());
-    assertThat(entity.getStatusCode(), is(HttpStatus.CREATED));
-    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
-    Map result = entity.getBody();
-    assertThat(result.get("id"), is(demo.id));
-    assertThat(result.containsKey("ts"), is(true));
+    verify(service, times(1)).save(any());
+    assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
+    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    Map body = response.getBody();
+    assertThat(body.get("id"), is(dto.id));
+    assertThat(body.containsKey("ts"), is(true));
   }
 
   @Test
   public void update() {
     // mock service method
-    Demo demo = mock(Demo.class);
-    demo.id = 1;
-    when(demoService.save(any())).thenReturn(demo);
+    Demo dto = mock(Demo.class);
+    dto.id = 1;
+    when(service.save(any())).thenReturn(dto);
 
     // execute rest
     HttpHeaders requestHeaders = new HttpHeaders();
     requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-    HttpEntity<String> httpEntity = new HttpEntity<>(new Genson().serialize(demo), requestHeaders);
-    ResponseEntity<Map> entity = this.restTemplate.exchange("/demo/" + demo.id, HttpMethod.PUT, httpEntity, Map.class);
+    HttpEntity<String> httpEntity = new HttpEntity<>(new Genson().serialize(dto), requestHeaders);
+    ResponseEntity<Map> response = this.restTemplate.exchange("/demo/" + dto.id, HttpMethod.PUT, httpEntity, Map.class);
 
     // verify
-    verify(demoService, times(1)).save(any());
-    assertThat(entity.getStatusCode(), is(HttpStatus.OK));
-    assertThat(entity.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
-    Map result = entity.getBody();
-    assertThat(result.containsKey("ts"), is(true));
+    verify(service, times(1)).save(any());
+    assertThat(response.getStatusCode(), is(HttpStatus.OK));
+    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    Map body = response.getBody();
+    assertThat(body.containsKey("ts"), is(true));
   }
 
   @Test
   public void deleteOne() {
     // mock service method
     Integer id = 1;
-    doNothing().when(demoService).delete(id);
+    doNothing().when(service).delete(id);
 
     // execute rest
-    ResponseEntity<Void> entity = this.restTemplate.exchange("/demo/" + id, HttpMethod.DELETE, null, Void.class);
+    ResponseEntity<Void> response = this.restTemplate.exchange("/demo/" + id, HttpMethod.DELETE, null, Void.class);
 
     // verify
-    verify(demoService, times(1)).delete(id);
-    assertThat(entity.getStatusCode(), is(HttpStatus.NO_CONTENT));
-    assertThat(entity.getBody(), nullValue());
+    verify(service, times(1)).delete(id);
+    assertThat(response.getStatusCode(), is(HttpStatus.NO_CONTENT));
+    assertThat(response.getBody(), nullValue());
   }
 
   @Test
   public void deleteBatch() {
     // mock service method
     Integer[] ids = new Integer[]{1, 2};
-    doNothing().when(demoService).delete(ids);
+    doNothing().when(service).delete(ids);
 
     // execute rest
     HttpHeaders requestHeaders = new HttpHeaders();
     requestHeaders.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> httpEntity = new HttpEntity<>(new Genson().serialize(ids), requestHeaders);
-    ResponseEntity<Void> entity = this.restTemplate.exchange("/demo", HttpMethod.DELETE, httpEntity, Void.class);
+    ResponseEntity<Void> response = this.restTemplate.exchange("/demo", HttpMethod.DELETE, httpEntity, Void.class);
 
     // verify
-    verify(demoService, times(1)).delete(ids);
-    assertThat(entity.getStatusCode(), is(HttpStatus.NO_CONTENT));
-    assertThat(entity.getBody(), nullValue());
+    verify(service, times(1)).delete(ids);
+    assertThat(response.getStatusCode(), is(HttpStatus.NO_CONTENT));
+    assertThat(response.getBody(), nullValue());
   }
 }
