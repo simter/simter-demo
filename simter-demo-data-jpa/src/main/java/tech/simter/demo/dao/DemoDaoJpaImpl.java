@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @author RJ 2017-04-29
@@ -71,7 +70,7 @@ public class DemoDaoJpaImpl implements DemoDao {
   @Override
   public int delete(Integer... ids) {
     return entityManager.createQuery("delete from Demo where id in (:ids)")
-      .setParameter("ids", Arrays.stream(ids).collect(Collectors.toList()))
+      .setParameter("ids", Arrays.asList(ids))
       .executeUpdate();
   }
 }
