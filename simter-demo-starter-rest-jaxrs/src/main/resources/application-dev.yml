@@ -1,7 +1,6 @@
 #### 开发环境通用配置 ####
 
 spring:
-  #profiles.include: scheduler        # For TaxiDispatchSystem Scheduler
   main:
     banner-mode: 'console'
   datasource:

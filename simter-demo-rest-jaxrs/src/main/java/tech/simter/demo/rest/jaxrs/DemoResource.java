@@ -32,6 +32,7 @@ public interface DemoResource {
    * 获取指定状态的所有{demo}
    *
    * @param status 状态，为空则忽略状态条件
+   * @param search 模糊查询的条件值
    * @return 指定状态的所有{demo}
    */
   @GET

@@ -1,14 +1,12 @@
 #### 生产环境配置 ####
 
 spring:
-  profiles:
-    include: scheduler                # For TaxiDispatchSystem Scheduler
   main:
     banner-mode: 'off'
   datasource:
     initialize: false
   jpa:
-    show-sql: false                  # 控制是否输出 DDL、DML 语句，或者设置 logging.level.org.hibernate.SQL=DEBUG
+    show-sql: false                   # 控制是否输出 DDL、DML 语句，或者设置 logging.level.org.hibernate.SQL=DEBUG
     hibernate.ddl-auto: none          # none | create | create-drop | update | validate
 
 logging:
