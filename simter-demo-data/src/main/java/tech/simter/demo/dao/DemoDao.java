@@ -12,7 +12,7 @@ import java.util.List;
 public interface DemoDao {
   Demo get(Integer id);
 
-  List<Demo> find(CommonState status);
+  List<Demo> find(CommonState status, String search);
 
   Page<Demo> find(int pageNo, int pageSize, CommonState status);
 

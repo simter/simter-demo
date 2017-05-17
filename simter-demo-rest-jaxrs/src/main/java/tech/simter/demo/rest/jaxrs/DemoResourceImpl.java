@@ -32,8 +32,8 @@ public class DemoResourceImpl implements DemoResource {
   }
 
   @Override
-  public List<Demo> find(CommonState status) {
-    return demoService.find(status);
+  public List<Demo> find(CommonState status, String search) {
+    return demoService.find(status, search);
   }
 
   @Override

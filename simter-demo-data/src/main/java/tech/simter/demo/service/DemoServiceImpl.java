@@ -29,8 +29,8 @@ public class DemoServiceImpl implements DemoService {
   }
 
   @Override
-  public List<Demo> find(CommonState status) {
-    return demoDao.find(status);
+  public List<Demo> find(CommonState status, String search) {
+    return demoDao.find(status, search);
   }
 
   @Override

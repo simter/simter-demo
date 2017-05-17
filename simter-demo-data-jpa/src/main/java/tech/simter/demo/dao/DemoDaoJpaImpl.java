@@ -28,13 +28,15 @@ public class DemoDaoJpaImpl implements DemoDao {
   }
 
   @Override
-  public List<Demo> find(CommonState status) {
-    String jpql = "select d from Demo d";
-    if (status != null) jpql += " where status = :status";
-    jpql += " order by name";
+  public List<Demo> find(CommonState status, String search) {
+    String jpql = "select d from Demo d where 0=0";
+    if (status != null) jpql += " and status = :status";
+    if (search != null) jpql += " and name like :search";
+    jpql += " order by status, name";
 
     TypedQuery<Demo> query = entityManager.createQuery(jpql, Demo.class);
     if (status != null) query.setParameter("status", status);
+    if (search != null) query.setParameter("search", "%" + search + "%");
 
     return query.getResultList();
   }

@@ -36,7 +36,7 @@ public interface DemoResource {
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  List<Demo> find(@QueryParam("status") CommonState status);
+  List<Demo> find(@QueryParam("status") CommonState status, @QueryParam("search") String search);
 
   /**
    * 获取指定状态的{demo}

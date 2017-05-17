@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -64,13 +65,13 @@ public class DemoResourceImplTest {
     Demo dto = mock(Demo.class);
     dto.id = 1;
     list.add(dto);
-    when(service.find(any())).thenReturn(list);
+    when(service.find(null, null)).thenReturn(list);
 
     // execute rest
     ResponseEntity<List> response = this.restTemplate.getForEntity("/demo", List.class);
 
     // verify
-    verify(service, times(1)).find(any());
+    verify(service, times(1)).find(null, null);
     assertThat(response.getStatusCode(), is(HttpStatus.OK));
     assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
     List body = response.getBody();
