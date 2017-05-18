@@ -2,7 +2,7 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://${db.host}:${db.port:3306}/${db.name}?useSSL=false
+    url: jdbc:mysql://${db.host}:${db.port:3306}/${db.name}?useSSL=false&serverTimezone=Asia/Shanghai
     #driver-class-name: com.mysql.jdbc.Driver      # mysql:mysql-connector-java:5
     driver-class-name: com.mysql.cj.jdbc.Driver    # mysql:mysql-connector-java:6+
   jpa:
