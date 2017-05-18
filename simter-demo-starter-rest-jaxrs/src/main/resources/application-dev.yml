@@ -13,8 +13,11 @@ logging:
   file: target/app.log                 # will rotate when they reach 10 MB
   level:                               # one of TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
     root: INFO
+
     #org.springframework: WARN
-    #org.springframework.jdbc: INFO
+    org.springframework.jdbc: INFO
+    org.springframework.boot: INFO
+
     #org.hibernate: WARN
     org.hibernate.SQL: DEBUG          # 或者设置 spring.jpa.show-sql=true
     org.hibernate.tool: ERROR
@@ -23,7 +26,6 @@ logging:
     org.hibernate.engine.spi.QueryParameters: TRACE       # TRACE-jpql命名参数
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # TRACE-SQL占位参数，如 binding parameter [N] as [SQL-TYPW] - [VALUE]
     org.hibernate.type.descriptor.converter.AttributeConverterSqlTypeDescriptorAdapter: DEBUG # DEBUG-属性值到DB值的转换，如 Converted value on binding : Enabled -> 2
-    org.springframework.boot: INFO
 
     org.glassfish.jersey: DEBUG
     # details all resource, filter, interceptor, body reader/writer when first reach
