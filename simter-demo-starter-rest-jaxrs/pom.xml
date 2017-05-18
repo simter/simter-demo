@@ -214,4 +214,12 @@
     <system>Github</system>
     <url>https://github.com/simter/sister-demo/issues</url>
   </issueManagement>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>
