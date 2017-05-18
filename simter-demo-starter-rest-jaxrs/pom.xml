@@ -161,6 +161,35 @@
         </dependency>
       </dependencies>
     </profile>
+    <!-- development environment: tomcat + jersey + mysql -->
+    <profile>
+      <id>dev-mysql</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <app.env>dev</app.env>
+        <app.db>mysql</app.db>
+        <app.http>tomcat</app.http>
+        <app.rest>jersey</app.rest>
+        <app.dll-auto>none</app.dll-auto>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <!-- production environment: tomcat + jersey + postgres -->
     <profile>
       <id>prod</id>
       <activation>
@@ -177,6 +206,34 @@
         <dependency>
           <groupId>org.postgresql</groupId>
           <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <!-- production environment: tomcat + jersey + mysql -->
+    <profile>
+      <id>prod-mysql</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <app.env>prod</app.env>
+        <app.db>mysql</app.db>
+        <app.http>tomcat</app.http>
+        <app.rest>jersey</app.rest>
+        <app.dll-auto>none</app.dll-auto>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
           <groupId>org.springframework.boot</groupId>
