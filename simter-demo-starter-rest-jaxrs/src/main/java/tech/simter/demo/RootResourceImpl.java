@@ -1,7 +1,9 @@
-package tech.simter.demo.rest.jaxrs;
+package tech.simter.demo;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author RJ
@@ -9,9 +11,11 @@ import javax.inject.Singleton;
 @Named
 @Singleton
 public class RootResourceImpl implements RootResource {
+  private String ts = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+
   @Override
   public String root() {
-    return "A Simter Demo.";
+    return "Simter Demo.<br><br>Start at " + ts;
   }
 
   @Override

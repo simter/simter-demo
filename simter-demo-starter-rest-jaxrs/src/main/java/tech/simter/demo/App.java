@@ -7,12 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author RJ 2017-04-29
+ * @author RJ
  */
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "tech.simter")
-//@SpringBootConfiguration
 @EntityScan("tech.simter")
 public class App {
   public static void main(String[] args) {
