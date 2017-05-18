@@ -103,8 +103,37 @@
       <artifactId>hibernate-core</artifactId>
     </dependency>
   </dependencies>
-  <!-- dev: postgres + tomcat + jersey-->
   <profiles>
+    <!-- development environment: tomcat + jersey + hsql -->
+    <profile>
+      <id>dev-hsql</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <app.env>dev</app.env>
+        <app.db>hsql</app.db>
+        <app.http>tomcat</app.http>
+        <app.rest>jersey</app.rest>
+        <app.dll-auto>create-drop</app.dll-auto>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.hsqldb</groupId>
+          <artifactId>hsqldb</artifactId>
+          <scope>runtime</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <!-- development environment: tomcat + jersey + postgres -->
     <profile>
       <id>dev-postgres</id>
       <activation>
@@ -132,24 +161,22 @@
         </dependency>
       </dependencies>
     </profile>
-    <!-- dev: hsql + tomcat + jersey-->
     <profile>
-      <id>dev-hsql</id>
+      <id>prod</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <app.env>dev</app.env>
-        <app.db>hsql</app.db>
+        <app.env>prod</app.env>
+        <app.db>postgres</app.db>
         <app.http>tomcat</app.http>
         <app.rest>jersey</app.rest>
-        <app.dll-auto>create-drop</app.dll-auto>
+        <app.dll-auto>none</app.dll-auto>
       </properties>
       <dependencies>
         <dependency>
-          <groupId>org.hsqldb</groupId>
-          <artifactId>hsqldb</artifactId>
-          <scope>runtime</scope>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
           <groupId>org.springframework.boot</groupId>
