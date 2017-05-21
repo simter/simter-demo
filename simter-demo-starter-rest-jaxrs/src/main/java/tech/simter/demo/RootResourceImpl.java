@@ -1,9 +1,14 @@
 package tech.simter.demo;
 
+import tech.simter.vo.User;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * @author RJ
@@ -11,6 +16,8 @@ import java.time.format.DateTimeFormatter;
 @Named
 @Singleton
 public class RootResourceImpl implements RootResource {
+  @PersistenceContext
+  private EntityManager entityManager;
   private String ts = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 
   @Override
@@ -36,5 +43,12 @@ public class RootResourceImpl implements RootResource {
       "{\"date\":\"2017-5-10\",\"str\":\"文本2\",\"num\":2,\"moneyIn\":200,\"moneyOut\":102.05}," +
       "{\"date\":\"2017-5-9\",\"str\":\"文本3\",\"num\":3,\"moneyIn\":300,\"moneyOut\":103.05}" +
       "]}";
+  }
+
+  @Override
+  public List<User> demoUser() {
+    List<User> users = entityManager.createQuery("select u from User u", User.class)
+      .getResultList();
+    return users;
   }
 }
