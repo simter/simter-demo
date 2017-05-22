@@ -18,6 +18,7 @@
     <module>simter-demo-data-jpa</module>
     <module>simter-demo-rest-jaxrs</module>
     <module>simter-demo-starter-rest-jaxrs</module>
+    <module>simter-demo-ui-web</module>
   </modules>
   <url>https://github.com/simter/sister-demo</url>
   <licenses>

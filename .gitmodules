@@ -1,0 +1,3 @@
+[submodule "simter-demo-ui-web"]
+	path = simter-demo-ui-web
+	url = git@git.oschina.net:gftaxi/simter-demo-ui-web.git
