@@ -13,11 +13,14 @@ logging:
   file: app.log                       # will rotate when they reach 10 MB
   level:                              # one of TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
     root: WARN
+
     #org.springframework: WARN
-    #org.springframework.jdbc: INFO
+    #org.springframework.boot: WARN
+    org.springframework.boot.context.embedded: INFO
+
     #org.hibernate: WARN
-    #org.hibernate.SQL: DEBUG          # 或者设置 spring.jpa.show-sql=true
-    #org.hibernate.tool: ERROR
-    #org.hibernate.tool.hbm2ddl: DEBUG
-    #cn.gftaxi: INFO
-    cn.gftaxi.lease.App: INFO
+
+    #tech.simter: DEBUG
+
+    # tech.simter.demo: DEBUG
+    tech.simter.demo.App: INFO

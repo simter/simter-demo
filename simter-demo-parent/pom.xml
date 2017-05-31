@@ -23,29 +23,29 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <url>https://github.com/simter/sister-demo</url>
+  <url>https://github.com/simter/simter-file</url>
   <licenses>
     <license>
-      <name>gftaxi</name>
-      <url>https://git.oschina.net/gftaxi/licenses</url>
+      <name>MIT</name>
+      <url>https://opensource.org/licenses/MIT</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
   <scm>
-    <url>https://github.com/simter/sister-demo</url>
+    <url>https://github.com/simter/simter-demo.git</url>
   </scm>
   <organization>
     <name>simter</name>
-    <url>https://github.com/simter/</url>
+    <url>https://github.com/simter</url>
   </organization>
   <developers>
     <developer>
-      <name>RJ.Hwang</name>
+      <name>RJ Hwang</name>
       <email>rongjihuang@gmail.com</email>
     </developer>
   </developers>
   <issueManagement>
-    <system>Github</system>
-    <url>https://github.com/simter/sister-demo/issues</url>
+    <system>GitHub</system>
+    <url>https://github.com/simter/simter-demo/issues</url>
   </issueManagement>
 </project>

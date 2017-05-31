@@ -44,7 +44,7 @@ spring:
     #hibernate.ddl-auto: create-drop                  # none | create | create-drop | update | validate
 
 server:
-  port: ${port:9000}
+  port: ${port:9010}
   contextPath: /
   #address: 127.0.0.1
   #sessionTimeout: 30
