@@ -3,6 +3,8 @@
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
   <!-- trace < debug < info < warn < error -->
   <root level="warn"/>
+  <logger name="tech.simter.rest.jaxrs.ThrowableExceptionMapper" level="debug"/>
+  <logger name="tech.simter.demo.rest.jaxrs" level="debug"/>
   <!--<logger name="org.springframework" level="info"/>-->
   <!--<logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="debug"/>-->
   <!--<logger name="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" level="debug"/>-->
