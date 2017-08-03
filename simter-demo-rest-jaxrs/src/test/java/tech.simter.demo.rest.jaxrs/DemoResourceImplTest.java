@@ -54,7 +54,7 @@ public class DemoResourceImplTest {
     // verify
     verify(service, times(1)).get(dto.id);
     assertThat(response.getStatusCode(), is(HttpStatus.OK));
-    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    assertThat(response.getHeaders().getContentType().isCompatibleWith(MediaType.APPLICATION_JSON), is(true));
     assertThat(response.getBody().id, is(dto.id));
   }
 
@@ -73,7 +73,7 @@ public class DemoResourceImplTest {
     // verify
     verify(service, times(1)).find(null, null);
     assertThat(response.getStatusCode(), is(HttpStatus.OK));
-    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    assertThat(response.getHeaders().getContentType().isCompatibleWith(MediaType.APPLICATION_JSON), is(true));
     List body = response.getBody();
     for (int i = 0; i < body.size(); i++) {
       assertThat(((Map) body.get(i)).get("id"), is(list.get(i).id));
@@ -102,7 +102,7 @@ public class DemoResourceImplTest {
     // verify
     verify(service, times(1)).find(pageNo, pageSize, status);
     assertThat(response.getStatusCode(), is(HttpStatus.OK));
-    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    assertThat(response.getHeaders().getContentType().isCompatibleWith(MediaType.APPLICATION_JSON), is(true));
     Map body = response.getBody();
     assertThat(body.get("pageNo"), is(pageNo));
     assertThat(body.get("pageSize"), is(pageSize));
@@ -129,7 +129,7 @@ public class DemoResourceImplTest {
     // verify
     verify(service, times(1)).save(any());
     assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
-    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    assertThat(response.getHeaders().getContentType().isCompatibleWith(MediaType.APPLICATION_JSON), is(true));
     Map body = response.getBody();
     assertThat(body.get("id"), is(dto.id));
     assertThat(body.containsKey("ts"), is(true));
@@ -151,7 +151,7 @@ public class DemoResourceImplTest {
     // verify
     verify(service, times(1)).save(any());
     assertThat(response.getStatusCode(), is(HttpStatus.OK));
-    assertThat(response.getHeaders().getContentType(), is(MediaType.APPLICATION_JSON));
+    assertThat(response.getHeaders().getContentType().isCompatibleWith(MediaType.APPLICATION_JSON), is(true));
     Map body = response.getBody();
     assertThat(body.containsKey("ts"), is(true));
   }
